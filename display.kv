@@ -1,0 +1,68 @@
+<My_manager>:
+    ScreenOne:
+    ScreenTwo:
+    ScreenThree:
+
+<ScreenOne>:
+    name: 'one'
+    Label:
+        text: 'Screen 1'
+    BoxLayout:
+        orientation: 'horizontal'
+        size_hint_y: .20
+        Button:
+            text: 'Previous'
+            on_press:
+                app.root.transition.direction = 'right'
+                app.root.transition.duration = 1
+                app.root.current= 'three'
+
+        Button:
+            text: 'Next'
+            on_press:
+                app.root.transition.direction = 'left'
+                app.root.transition.duration = 1
+                app.root.current= 'two'
+
+<ScreenTwo>:
+    name: 'two'
+    Label:
+        text: 'Screen 2'
+    BoxLayout:
+        orientation: 'horizontal'
+        size_hint_y: .20
+        Button:
+            text: 'Previous'
+            on_press:
+                app.root.transition.direction = 'right'
+                app.root.transition.duration = 1
+                app.root.current= 'one'
+
+        Button:
+            text: 'Next'
+            on_press:
+                app.root.transition.direction = 'left'
+                app.root.transition.duration = 1
+                app.root.current= 'three'
+
+<ScreenThree>:
+    name: 'three'
+    Label:
+        text: 'Screen 3'
+    BoxLayout:
+        orientation: 'horizontal'
+        size_hint_y: .20
+
+        Button:
+            text: 'Previous'
+            on_press:
+                app.root.transition.direction = 'right'
+                app.root.transition.duration = 1
+                app.root.current= 'two'
+
+        Button:
+            text: 'Next'
+            on_press:
+                app.root.transition.direction = 'left'
+                app.root.transition.duration = 1
+                app.root.current= 'one'
