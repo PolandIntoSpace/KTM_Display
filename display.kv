@@ -6,7 +6,44 @@
 <ScreenOne>:
     name: 'one'
     Label:
-        text: 'Screen 1'
+        id: status_label
+        text: root.status
+        #text: "GO!"
+        pos: -220, 80
+        font_size: 100
+
+    BoxLayout:
+        canvas:
+            #id: ampel_zeichnung
+            Color:
+                rgb: root.ampel_oben
+            Ellipse:
+                #rgb: 1,2,1
+                size: 120, 120
+                #pos: self.center_x, self.center_y
+                pos: 340, 440
+
+            Color:
+                rgb: root.ampel_mitte
+            Ellipse:
+                size: 120, 120
+                #pos: self.center_x, self.center_y
+                pos: 340, 320
+
+            Color:
+                rgb: root.ampel_unten
+            Ellipse:
+                size: 120, 120
+                #pos: self.center_x, self.center_y
+                pos: 340, 200
+
+    Label:
+        id: time_label
+        #text: "17s"
+        text: str(root.time) + "s"
+        pos: 200, 80
+        font_size: 100
+
     BoxLayout:
         orientation: 'horizontal'
         size_hint_y: .20
@@ -27,7 +64,7 @@
 <ScreenTwo>:
     name: 'two'
     Label:
-        text: 'Screen 2'
+        text: root.name
     BoxLayout:
         orientation: 'horizontal'
         size_hint_y: .20
