@@ -1,0 +1,1 @@
+{"phase": "YELLOW-RED", "seconds": 2}
