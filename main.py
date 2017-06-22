@@ -20,76 +20,109 @@ class ScreenOne(Screen):
     with open("data/status_ampel.json") as json_data:
         d = json.load(json_data)
         color = d.get('phase')
-        # time = d.get('seconds')
-        # self.time = d.get('seconds')
         time = d.get('seconds')
 
     if color == 'GREEN':
         status = "FAHR\nZUA!"
-        ampel_oben = (0.5,0.5,0.5)
-        ampel_mitte = (0.5,0.5,0.5)
+        ampel_oben = (0.5, 0.5, 0.5)
+        ampel_mitte = (0.5, 0.5, 0.5)
         ampel_unten = (0.13, 0.545, 0.13)
     elif color == 'RED':
         status = "HALT!"
-        ampel_oben = (0.86,0.078,0.23)
-        ampel_mitte = (0.5,0.5,0.5)
-        ampel_unten = (0.5,0.5,0.5)
+        ampel_oben = (0.86, 0.078, 0.23)
+        ampel_mitte = (0.5, 0.5, 0.5)
+        ampel_unten = (0.5, 0.5, 0.5)
     elif color == "YELLOW":
         status = "OBACHT!"
-        ampel_oben = (0.5,0.5,0.5)
-        ampel_mitte = (1,0.84,0)
-        ampel_unten = (0.5,0.5,0.5)
+        ampel_oben = (0.5, 0.5, 0.5)
+        ampel_mitte = (1, 0.84, 0)
+        ampel_unten = (0.5, 0.5, 0.5)
     else:
         status = "OBACHT!"
         ampel_oben = (0.86, 0.078, 0.23)
-        ampel_mitte = (1,0.84,0)
-        ampel_unten = (0.5,0.5,0.5)
-
-
+        ampel_mitte = (1, 0.84, 0)
+        ampel_unten = (0.5, 0.5, 0.5)
 
     def update(self, dt):
-        #status = ObjectProperty(None)
-        #time = ObjectProperty(None)
-        #color = "?"
-
 
         with open("data/status_ampel.json") as json_data:
             d = json.load(json_data)
             color = d.get('phase')
-            #time = d.get('seconds')
-            #self.time = d.get('seconds')
-            #self.time_label.text = d.get('seconds')
+            time = d.get('seconds')
 
         if color == 'GREEN':
-            #status = "GO!"
-            self.status = "GO!"
+            status = "FAHR\nZUA!"
+            ampel_oben = (0.5,0.5,0.5)
+            ampel_mitte = (0.5,0.5,0.5)
+            ampel_unten = (0.13, 0.545, 0.13)
         elif color == 'RED':
-            #status = "STOP!"
-            self.status = "STOP!"
+            status = "HALT!"
+            ampel_oben = (0.86,0.078,0.23)
+            ampel_mitte = (0.5,0.5,0.5)
+            ampel_unten = (0.5,0.5,0.5)
+        elif color == "YELLOW":
+            status = "OBACHT!"
+            ampel_oben = (0.5,0.5,0.5)
+            ampel_mitte = (1,0.84,0)
+            ampel_unten = (0.5,0.5,0.5)
         else:
-            #status = "WAIT!"
-            self.status = "WAIT!"
+            status = "OBACHT!"
+            ampel_oben = (0.86, 0.078, 0.23)
+            ampel_mitte = (1,0.84,0)
+            ampel_unten = (0.5,0.5,0.5)
 
 
-    #def update(self, event):
-    #    self.time_label.text = time
-    #    self.status_label.text = status
+
 
 class ScreenTwo(Screen):
-    pass
+    speed = ObjectProperty(None)
+
+    with open("data/speed_vehicle.txt", 'r') as speed_data:
+        speed = speed_data.readline() + " km/h"
+
+    #def update_speed(self, *args):
+    #    with open("data/speed_vehicle.txt", 'r') as speed_data:
+    #        self.speed = speed_data.readline() + " km/h"
+
+
+    def update(self, dt):
+        with open("data/speed_vehicle.txt", 'r') as speed_data:
+            self.speed = speed_data.readline() + " km/h"
+
 
 class ScreenThree(Screen):
-    pass
+    capacity = ObjectProperty(None)
+
+    with open("data/spannung_vehicle.txt", 'r') as spannung_data:
+        capacity = spannung_data.readline() + " V"
+
+    #def update_spannung(self, *args):
+    #    with open("data/spannung_vehicle.txt", 'r') as spannung_data:
+    #        self.capacity = spannung_data.readline() + " V"
+
+
+    def update(self, dt):
+        #self.current_screen.update(dt)
+        with open("data/spannung_vehicle.txt", 'r') as spannung_data:
+            self.capacity = spannung_data.readline() + " V"
 
 class My_manager(ScreenManager):
+
+    #def update(self, dt):
+        #self.current_screen.update(self, dt)
     pass
 
 class DisplayApp(App):
 
     def build(self):
         root = My_manager()
-        scrone = ScreenOne()
-        Clock.schedule_interval(scrone.update, 1.0 / 60.0)
+        #self.one = ScreenOne(name='one')
+        #self.two = ScreenTwo(name='two')
+        #self.three = ScreenThree(name='three')
+        #root.add_widget(self.one)
+        #root.add_widget(self.two)
+        #root.add_widget(self.three)
+        Clock.schedule_interval(root.current_screen.update, 1.0 / 60.0)
         return root
 
 if __name__ == '__main__':

@@ -64,7 +64,10 @@
 <ScreenTwo>:
     name: 'two'
     Label:
-        text: root.name
+        id: speed_label
+        text: root.speed
+        pos: 0, 80
+        font_size: 140
     BoxLayout:
         orientation: 'horizontal'
         size_hint_y: .20
@@ -85,7 +88,10 @@
 <ScreenThree>:
     name: 'three'
     Label:
-        text: 'Screen 3'
+        id: capacity_label
+        text: root.capacity
+        pos: 0, 80
+        font_size: 140
     BoxLayout:
         orientation: 'horizontal'
         size_hint_y: .20
