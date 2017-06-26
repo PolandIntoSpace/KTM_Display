@@ -1,8 +1,16 @@
+# Dieses Skript ist Teil der DisplayApp und funktioniert mit dem Skript main.py zusammen.
+# Das Skript ist einfach zu erweitern und wurde mit Hilfe der Kv-Language (https://kivy.org/docs/guide/lang.html) verfasst.
+# Stand: 26.06.2017, KTM, Gruppe Display
+
+# Im Moment besteht der Code aus drei Screens mit drei Informationen: Ampelphase, Geschwindigkeit und Spannung.
 <My_manager>:
     ScreenOne:
     ScreenTwo:
     ScreenThree:
 
+# Der Screen zeigt eine Ampel, bestehend aus drei Kreisen, und zwei Schriftzüge an.
+# Im ersten wird eine Nachricht (Warnung) angeziegt, im zweiten ein Countdown zur nächsten Ampelphase.
+# Die Ampelfarben wie auch die Texte werden im Python-Skript, in Abhängigkeit von den erhaltenen Sensordaten, gesetzt.
 <ScreenOne>:
     name: 'one'
     Label:
@@ -14,7 +22,6 @@
 
     BoxLayout:
         canvas:
-            #id: ampel_zeichnung
             Color:
                 rgb: root.ampel_oben
             Ellipse:
@@ -44,6 +51,7 @@
         pos: 200, 80
         font_size: 100
 
+    # Buttons um zum nächsten/vorherigen Screen zu wechseln.
     BoxLayout:
         orientation: 'horizontal'
         size_hint_y: .20
@@ -61,6 +69,8 @@
                 app.root.transition.duration = 1
                 app.root.current= 'two'
 
+
+# Dieser Screen zeigt die ausgelesene Geschwindigkeit an (Echtzeit möglich).
 <ScreenTwo>:
     name: 'two'
     Label:
@@ -68,6 +78,8 @@
         text: root.speed
         pos: 0, 80
         font_size: 140
+
+    # Buttons um zum nächsten/vorherigen Screen zu wechseln.
     BoxLayout:
         orientation: 'horizontal'
         size_hint_y: .20
@@ -85,6 +97,7 @@
                 app.root.transition.duration = 1
                 app.root.current= 'three'
 
+# Dieser Screen zeigt die ausgelesene Spannung an (Echtzeit möglich).
 <ScreenThree>:
     name: 'three'
     Label:
@@ -92,6 +105,8 @@
         text: root.capacity
         pos: 0, 80
         font_size: 140
+
+    # Buttons um zum nächsten/vorherigen Screen zu wechseln.
     BoxLayout:
         orientation: 'horizontal'
         size_hint_y: .20
