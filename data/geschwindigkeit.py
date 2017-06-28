@@ -2,7 +2,7 @@ import time
 speed = 0
 delta = 1
 while(1):
-        f = open('speed_vehicle.txt', 'w')
+        f = open('/home/pi/KTM_Display/data/speed_vehicle.txt', 'w')
         f.write(str(speed))
         speed = speed + delta
         if (speed > 20):

@@ -4,7 +4,7 @@ red = '"RED"}'
 green = '"GREEN"}'
 phase = red
 while(1):
-        f = open('status_ampel.json', 'w')
+        f = open('/home/pi/KTM_Display/data/status_ampel.json', 'w')
         f.write('{"seconds": ')
         f.write(str(times))
         f.write(', "phase": ')
